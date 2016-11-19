@@ -4,19 +4,20 @@ namespace Beryllium\SilexCacheProvider;
 
 use Beryllium\Cache\Client\APCClient;
 use Beryllium\Cache\Client\MemcacheClient;
-use Silex\Application;
-use Silex\ServiceProviderInterface;
+use Pimple\Container;
+use Silex\Api\BootableProviderInterface;
+use Pimple\ServiceProviderInterface;
 use Beryllium\Cache\Client\FilecacheClient;
 use Beryllium\Cache\Statistics\Tracker\FilecacheStatisticsTracker;
 use Beryllium\Cache\Cache;
 
-class SilexCacheProvider implements ServiceProviderInterface
+class SilexCacheProvider implements BootableProviderInterface, ServiceProviderInterface
 {
     public function boot(Application $app)
     {
     }
 
-    public function register(Application $app)
+    public function register(Container $app)
     {
         // defaults (these can be overridden in the container)
         $app['be_cache.type']   = 'memcache';
